@@ -16,14 +16,20 @@ namespace SuperSocket.Imap.Server
         {
             if (requestInfo.Parameters.Length != 2)
             {
-                session.SendLine("* BAD Wrong number of arguments");
+                session.SendBAD("Wrong number of arguments");
                 return;
             }
             TUserKey userKey;
             if (!session.AppServer.AuthenticationProvider.Authenticate(requestInfo.Parameters[0], requestInfo.Parameters[1], out userKey))
             {
-                
+                session.SendLine(requestInfo, "NO LOGIN failed. User or password is incorrect!");
+                return;
             }
+            session.UserKey = userKey;
+            session.Authenticated = true;
+            // for now:
+            //session.SendLine(requestInfo, "OK LOGIN completed. ");
+            session.SendLine(requestInfo, "OK LOGIN completed. User identified as '" + userKey.ToString() + "'");
         }
 
         /// <summary>

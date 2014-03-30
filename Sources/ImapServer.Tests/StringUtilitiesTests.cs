@@ -14,6 +14,8 @@ namespace SuperSocket.Imap.Server.Tests
             AssertPos("Hello, World!", 0, 7, ' ', "Hello,");
             AssertPos("Hello, World!", 7, 13, ' ', "World!");
             AssertPos("Hello, World!", 13, 13, ' ', null);
+            AssertPos("aa login ma te", 9, 12, ' ', "ma");
+
         }
 
         private void AssertPos(string data, int originalStartPos, int nextStartPos, char separator, string fetchedData)

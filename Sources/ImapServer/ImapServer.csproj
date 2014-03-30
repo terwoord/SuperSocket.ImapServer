@@ -45,7 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseIMAPCommand.cs" />
-    <Compile Include="CommandLoader.cs" />
+    <Compile Include="_Commands\CommandLoader.cs" />
     <Compile Include="_Commands\HELPcommand.cs" />
     <Compile Include="ImapReceiveFilter.cs" />
     <Compile Include="ImapRequestInfo.cs" />

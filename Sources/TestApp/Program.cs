@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SuperSocket.Imap.Server;
 using SuperSocket.SocketBase;
 using SuperSocket.SocketBase.Logging;
+using TestApp.Impls;
 
 namespace TestApp
 {
@@ -14,7 +15,7 @@ namespace TestApp
         static void Main(string[] args)
         {
             log4net.Config.XmlConfigurator.Configure();
-            var appServer = new ImapServer<string>();
+            var appServer = new ImapServer<string>(new AuthenticationProviderImpl());
 
             //Setup the appServer
             

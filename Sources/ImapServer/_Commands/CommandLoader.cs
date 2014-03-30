@@ -10,18 +10,8 @@ using SuperSocket.SocketBase.Config;
 
 namespace SuperSocket.Imap.Server
 {
-    public class ImapCommandLoader<TUserKey> : CommandLoaderBase<BaseIMAPCommand<TUserKey>>, ICommandLoader<ICommand<ImapServerSession<TUserKey>, ImapRequestInfo>>
+    public class ImapCommandLoader<TUserKey> : ICommandLoader<ICommand<ImapServerSession<TUserKey>, ImapRequestInfo>>
     {
-        /// <summary>
-        /// Initializes the command loader by the root config and appserver instance.
-        /// </summary>
-        /// <param name="rootConfig">The root config.</param><param name="appServer">The app server.</param>
-        /// <returns/>
-        public override bool Initialize(IRootConfig rootConfig, IAppServer appServer)
-        {
-            return true;
-        }
-
         /// <summary>
         /// Tries to load commands.
         /// </summary>
@@ -31,6 +21,7 @@ namespace SuperSocket.Imap.Server
         {
             var result = new List<BaseIMAPCommand<TUserKey>>();
             result.Add(new HELPcommand<TUserKey>());
+            result.Add(new LoginCommand<TUserKey>());
             commands = result;
             return true;
         }
@@ -48,16 +39,10 @@ namespace SuperSocket.Imap.Server
             }
         }
 
-        /// <summary>
-        /// Tries to load commands.
-        /// </summary>
-        /// <param name="commands">The commands.</param>
-        /// <returns/>
-        public override bool TryLoadCommands(out IEnumerable<BaseIMAPCommand<TUserKey>> commands)
+        public event EventHandler<ErrorEventArgs> Error;
+
+        public bool Initialize(IRootConfig config, IAppServer server)
         {
-            var result = new List<BaseIMAPCommand<TUserKey>>();
-            result.Add(new HELPcommand<TUserKey>());
-            commands = result;
             return true;
         }
     }

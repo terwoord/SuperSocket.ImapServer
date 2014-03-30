@@ -62,7 +62,17 @@ namespace SuperSocket.Imap.Server
         public TUserKey UserKey
         {
             get;
-            private set;
+            set;
+        }
+
+        public void SendBAD(string message)
+        {
+            Send("* BAD " + message);
+        }
+
+        public void SendLine(ImapRequestInfo request, string data)
+        {
+            Send("{0} {1}", request.CommandTag, data);
         }
     }
 }

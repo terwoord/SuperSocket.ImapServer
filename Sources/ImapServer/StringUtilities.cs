@@ -28,7 +28,7 @@ namespace SuperSocket.Imap.Server
                 return data.Substring(oldStartPos);
             }
             startingPosition = nextPos + 1;
-            return data.Substring(oldStartPos, nextPos);
+            return data.Substring(oldStartPos, nextPos - oldStartPos);
         }
     }
 }
