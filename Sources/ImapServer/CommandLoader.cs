@@ -10,9 +10,7 @@ using SuperSocket.SocketBase.Config;
 
 namespace SuperSocket.Imap.Server
 {
-    public class ImapCommandLoader<TSession, TRequestInfo>: CommandLoaderBase<BaseIMAPCommand<TSession, TRequestInfo>>, ICommandLoader<ICommand<TSession, TRequestInfo>>
-        where TSession: ImapServerSessionBase<TSession, TRequestInfo>, new()
-        where TRequestInfo: ImapRequestInfoBase<TRequestInfo>
+    public class ImapCommandLoader<TUserKey> : CommandLoaderBase<BaseIMAPCommand<TUserKey>>, ICommandLoader<ICommand<ImapServerSession<TUserKey>, ImapRequestInfo>>
     {
         /// <summary>
         /// Initializes the command loader by the root config and appserver instance.
@@ -29,16 +27,16 @@ namespace SuperSocket.Imap.Server
         /// </summary>
         /// <param name="commands">The commands.</param>
         /// <returns/>
-        bool ICommandLoader<ICommand<TSession, TRequestInfo>>.TryLoadCommands(out IEnumerable<ICommand<TSession, TRequestInfo>> commands)
+        bool ICommandLoader<ICommand<ImapServerSession<TUserKey>, ImapRequestInfo>>.TryLoadCommands(out IEnumerable<ICommand<ImapServerSession<TUserKey>, ImapRequestInfo>> commands)
         {
-            var result = new List<BaseIMAPCommand<TSession, TRequestInfo>>();
-            result.Add(new HELPcommand<TSession, TRequestInfo>());
+            var result = new List<BaseIMAPCommand<TUserKey>>();
+            result.Add(new HELPcommand<TUserKey>());
             commands = result;
             return true;
         }
 
-        private EventHandler<CommandUpdateEventArgs<ICommand<TSession, TRequestInfo>>> mTestUpdated;
-        event EventHandler<CommandUpdateEventArgs<ICommand<TSession, TRequestInfo>>> ICommandLoader<ICommand<TSession, TRequestInfo>>.Updated
+        private EventHandler<CommandUpdateEventArgs<ICommand<ImapServerSession<TUserKey>, ImapRequestInfo>>> mTestUpdated;
+        event EventHandler<CommandUpdateEventArgs<ICommand<ImapServerSession<TUserKey>, ImapRequestInfo>>> ICommandLoader<ICommand<ImapServerSession<TUserKey>, ImapRequestInfo>>.Updated
         {
             add
             {
@@ -55,10 +53,10 @@ namespace SuperSocket.Imap.Server
         /// </summary>
         /// <param name="commands">The commands.</param>
         /// <returns/>
-        public override bool TryLoadCommands(out IEnumerable<BaseIMAPCommand<TSession, TRequestInfo>> commands)
+        public override bool TryLoadCommands(out IEnumerable<BaseIMAPCommand<TUserKey>> commands)
         {
-            var result = new List<BaseIMAPCommand<TSession, TRequestInfo>>();
-            result.Add(new HELPcommand<TSession, TRequestInfo>());
+            var result = new List<BaseIMAPCommand<TUserKey>>();
+            result.Add(new HELPcommand<TUserKey>());
             commands = result;
             return true;
         }

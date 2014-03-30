@@ -54,9 +54,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ImapRequestInfo.cs" />
-    <Compile Include="ImapServerImpl.cs" />
-    <Compile Include="ImapServerSession.cs" />
+    <None Include="ImapRequestInfo.cs" />
+    <None Include="ImapServerImpl.cs" />
+    <None Include="ImapServerSession.cs" />
+    <Compile Include="Impls\AuthenticationProviderImpl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

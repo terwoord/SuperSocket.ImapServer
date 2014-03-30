@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SuperSocket.Imap.Server;
 using SuperSocket.SocketBase;
 using SuperSocket.SocketBase.Logging;
 
@@ -13,7 +14,7 @@ namespace TestApp
         static void Main(string[] args)
         {
             log4net.Config.XmlConfigurator.Configure();
-            var appServer = new ImapServerImpl();
+            var appServer = new ImapServer<string>();
 
             //Setup the appServer
             
@@ -47,11 +48,6 @@ namespace TestApp
 
             Console.WriteLine("The server was stopped!");
             Console.ReadKey();
-        }
-
-        private static void AppServerOnNewSessionConnected(AppSession session)
-        {
-            session.Send("Welcome!");
         }
     }
 }

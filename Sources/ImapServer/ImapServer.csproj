@@ -46,13 +46,16 @@
   <ItemGroup>
     <Compile Include="BaseIMAPCommand.cs" />
     <Compile Include="CommandLoader.cs" />
-    <Compile Include="HELPcommand.cs" />
+    <Compile Include="_Commands\HELPcommand.cs" />
     <Compile Include="ImapReceiveFilter.cs" />
-    <Compile Include="ImapRequestInfoBase.cs" />
+    <Compile Include="ImapRequestInfo.cs" />
     <Compile Include="ImapRequestInfoParser.cs" />
-    <Compile Include="ImapServerBase.cs" />
-    <Compile Include="ImapServerSessionBase.cs" />
+    <Compile Include="ImapServer.cs" />
+    <Compile Include="ImapServerSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringUtilities.cs" />
+    <Compile Include="_Commands\LoginCommand.cs" />
+    <Compile Include="_Infra\IAuthenticationProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
