@@ -72,7 +72,7 @@ namespace SuperSocket.Imap.Server
 
         public void SendLine(ImapRequestInfo request, string data)
         {
-            Send("{0} {1}", request.CommandTag, data);
+            Send("{0} {1}{2}", request.CommandTag, data, Environment.NewLine);
         }
     }
 }
